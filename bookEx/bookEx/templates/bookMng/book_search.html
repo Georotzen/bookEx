@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+       <li>
+          <a href="{{ item.link }}"> {{ item.item }}</a>
+       </li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+   <form action="{% url 'search' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="name">
+    <input type="submit" name="submit" value="Search">
+   </form>
+
+    {% for result in results %}
+
+        <p>{{result.name}}</p>
+
+    {% endfor %}
+{% endblock content%}
